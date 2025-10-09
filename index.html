@@ -35,6 +35,13 @@
             </h1>
             <p id="welcome-message" class="text-gray-600 mt-2">Pon a prueba tus conocimientos</p>
             
+            <!-- Bookmarks Section -->
+            <div id="bookmarks-container" class="hidden mt-8 text-left max-w-lg mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Preguntas Guardadas</h3>
+                <div id="bookmarks-list" class="space-y-3 max-h-80 overflow-y-auto p-4 bg-white border border-gray-200 rounded-lg"></div>
+                <div id="bookmark-quiz-button-container" class="mt-4 text-center"></div>
+            </div>
+
             <!-- Search Functionality -->
             <div class="mt-8 max-w-lg mx-auto">
                 <label for="search-input" class="sr-only">Buscar preguntas</label>
@@ -67,6 +74,11 @@
         <div id="quiz-screen" class="hidden w-full max-w-3xl bg-white p-6 md:p-8 rounded-2xl shadow-lg">
             <div class="flex justify-between items-center mb-6">
                 <p id="progress-text" class="text-gray-600 font-semibold">Pregunta 1 / 20</p>
+                
+                <button id="bookmark-btn" class="p-2 rounded-full hover:bg-yellow-100 transition" aria-label="Guardar pregunta">
+                    <!-- SVG will be dynamically inserted here -->
+                </button>
+
                 <div class="flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -172,7 +184,7 @@
             { questionText: "El stock de seguridad sirve para evitar roturas de stock por variaciones en la demanda.", options: ["Verdadero", "Falso"], correctAnswerIndex: 0 },
             // Page 11
             { questionText: "¿Qué es el \"picking\"?", options: ["Selección y preparación de pedidos para clientes", "Recepción inicial de la mercancía", "Proceso de devolución de productos", "Control financiero de facturas"], correctAnswerIndex: 0 },
-            { questionText: "El cross-docking consiste en almacenar mercancía durante largos periodos antes de su expedición.", options: ["Verdadero", "Falso"], correctAnswerIndex: 1 },
+            { questionText: "El cross-docking consiste en almacenar mercancía durante largos periodos antes de su expedición.", options: ["Verdadero", "Falgo"], correctAnswerIndex: 1 },
             { questionText: "¿Qué es un código QR?", options: ["Un código bidimensional que almacena más información que un código de barras tradicional", "Un documento para transporte internacional", "Un sistema de gestión administrativa", "Una norma de trazabilidad física"], correctAnswerIndex: 0 },
             { questionText: "El embalaje protege la mercancía durante transporte y almacenaje.", options: ["Verdadero", "Falso"], correctAnswerIndex: 0 },
             { questionText: "¿Qué significa FIFO?", options: ["First In, First Out (primero en entrar, primero en salir)", "Free Input, Free Output", "Fast Information for Operators", "Flexible Inventory for Orders"], correctAnswerIndex: 0 },
@@ -338,7 +350,6 @@
             { questionText: "Los neumáticos de las carretillas elevadoras pueden ser de tres tipos. Señala la opción correcta.", options: ["Superelásticas: son completamente macizas pero compuestas de diferentes materiales, siendo las más comunes.", "De bandaje: tienen el inconveniente de no mantener de la misma manera la estabilidad dimensional.", "De bandaje: son completamente macizas pero compuestas de diferentes materiales, siendo las más comunes."], correctAnswerIndex: 0 },
             { questionText: "En el transporte de mercancía peligrosa se deben tener en cuenta lo siguiente. Señala la opción incorrecta.", options: ["Centrar y estabilizar la carga.", "Los recipientes deberán ir en posición horizontal.", "Reducir la velocidad del transporte."], correctAnswerIndex: 1 },
             // Page 40
-            { questionText: "Para el mantenimiento preventivo de las carretillas se verificará. Señala la opción correcta.", options: ["Limpiar el radiador.", "Cilindros de inclinación y elevación.", "Ambas son correctas."], correctAnswerIndex: 2 },
             { questionText: "¿Qué ventaja tiene el \"Sistema de estantería con base móvil (MovaRack)\"?", options: ["Malo aprovechamiento del espacio.", "Buen aprovechamiento del espacio (solo 1 pasillo), pero mucho mantenimiento.", "Ni FiFo ni LiFo.", "Para productos de baja rotación solo."], correctAnswerIndex: 1, imageUrl: "https://i.postimg.cc/vH2JdYhn/Almacenaje-m-vil.jpg" },
             { questionText: "¿Para qué rotación es ideal el \"Sistema Automático\"?", options: ["Baja rotación.", "Alta rotación.", "Sin rotación específica.", "Solo media."], correctAnswerIndex: 1, imageUrl: "https://i.postimg.cc/J4YfWrx1/Sistema-autom-ticos.jpg" },
             { questionText: "¿Qué es un \"Sistema Autoportante\"?", options: ["Estantería convencional con base móvil.", "Estructura integrada donde las estanterías forman parte del edificio, con alta rotación y mucho mantenimiento.", "Sistema manual.", "Para productos pequeños."], correctAnswerIndex: 1, imageUrl: "https://i.postimg.cc/HsvqCYz7/Sistema-autoportante.jpg" },
@@ -368,6 +379,8 @@
             { questionText: "Los fabricantes deben proporcionar piezas de repuesto durante 10 años después de que el producto deje de fabricarse.", options: ["Verdadero", "Falso"], correctAnswerIndex: 0 },
             { questionText: '¿Qué incluye el marcado "CE" en los equipos?', options: ["Es una marca exclusiva de China Export.", "Indica que está fabricado conforme a un expediente técnico y es una máquina segura.", "Solo garantiza 3 años de garantía.", "No requiere manual en español."], correctAnswerIndex: 1 }
         ];
+
+        const allQuestionsWithIndex = allQuestions.map((q, index) => ({ ...q, originalIndex: index }));
 
         // DOM Elements
         const nameScreen = document.getElementById('name-screen');
@@ -401,6 +414,12 @@
         const noResultsMessage = document.getElementById('no-results-message');
         const topicQuizButtonContainer = document.getElementById('topic-quiz-button-container');
 
+        // Bookmark elements
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        const bookmarksContainer = document.getElementById('bookmarks-container');
+        const bookmarksList = document.getElementById('bookmarks-list');
+        const bookmarkQuizButtonContainer = document.getElementById('bookmark-quiz-button-container');
+
         // State
         let username = '';
         let currentQuestions = [];
@@ -410,6 +429,86 @@
         let startTime = 0;
         let timerInterval;
         let wakeLock = null;
+        let bookmarkedQuestions = new Set();
+        const BOOKMARKS_STORAGE_KEY = 'logisticsQuizBookmarks';
+        const bookmarkIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>`;
+        const bookmarkedIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" viewBox="0 0 20 20" fill="currentColor"><path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" /></svg>`;
+
+        // Bookmark Functions
+        const loadBookmarks = () => {
+            const storedBookmarks = localStorage.getItem(BOOKMARKS_STORAGE_KEY);
+            if (storedBookmarks) {
+                bookmarkedQuestions = new Set(JSON.parse(storedBookmarks));
+            }
+        };
+
+        const saveBookmarks = () => {
+            localStorage.setItem(BOOKMARKS_STORAGE_KEY, JSON.stringify(Array.from(bookmarkedQuestions)));
+        };
+
+        const removeBookmark = (originalIndex) => {
+            bookmarkedQuestions.delete(originalIndex);
+            saveBookmarks();
+            renderBookmarksSection();
+        };
+
+        const startBookmarkedQuiz = () => {
+            const bookmarkedQuizQuestions = allQuestionsWithIndex.filter(q => bookmarkedQuestions.has(q.originalIndex));
+            if (bookmarkedQuizQuestions.length > 0) {
+                startQuiz(shuffleArray(bookmarkedQuizQuestions));
+            }
+        };
+
+        const renderBookmarksSection = () => {
+            if (bookmarkedQuestions.size > 0) {
+                bookmarksContainer.classList.remove('hidden');
+                bookmarksList.innerHTML = '';
+                bookmarkQuizButtonContainer.innerHTML = '';
+
+                const questionsToRender = allQuestionsWithIndex.filter(q => bookmarkedQuestions.has(q.originalIndex));
+
+                questionsToRender.forEach(q => {
+                    const li = document.createElement('li');
+                    li.className = 'p-3 bg-gray-50 rounded-md flex justify-between items-center';
+                    li.innerHTML = `<p class="text-gray-800 text-sm mr-2">${q.questionText}</p>`;
+
+                    const removeButton = document.createElement('button');
+                    removeButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 hover:text-red-700" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>`;
+                    removeButton.className = 'ml-4 p-1 rounded-full hover:bg-red-100 flex-shrink-0';
+                    removeButton.setAttribute('aria-label', 'Eliminar marcador');
+                    removeButton.onclick = () => removeBookmark(q.originalIndex);
+
+                    li.appendChild(removeButton);
+                    bookmarksList.appendChild(li);
+                });
+
+                const startBtn = document.createElement('button');
+                startBtn.textContent = `Iniciar Test de Preguntas Guardadas (${bookmarkedQuestions.size})`;
+                startBtn.className = 'px-6 py-3 text-lg font-bold text-white bg-orange-500 rounded-lg hover:bg-orange-600 transition-transform transform hover:scale-105 shadow-md';
+                startBtn.onclick = startBookmarkedQuiz;
+                bookmarkQuizButtonContainer.appendChild(startBtn);
+
+            } else {
+                bookmarksContainer.classList.add('hidden');
+            }
+        };
+
+        const handleBookmarkToggle = () => {
+            const question = currentQuestions[currentQuestionIndex];
+            if (!question) return;
+
+            const { originalIndex } = question;
+            if (bookmarkedQuestions.has(originalIndex)) {
+                bookmarkedQuestions.delete(originalIndex);
+                bookmarkBtn.innerHTML = bookmarkIconSVG;
+                bookmarkBtn.setAttribute('aria-label', 'Guardar pregunta');
+            } else {
+                bookmarkedQuestions.add(originalIndex);
+                bookmarkBtn.innerHTML = bookmarkedIconSVG;
+                bookmarkBtn.setAttribute('aria-label', 'Pregunta guardada');
+            }
+            saveBookmarks();
+        };
 
         // Screen Wake Lock API
         const requestWakeLock = async () => {
@@ -466,6 +565,9 @@
             quizScreen.classList.add('hidden');
             resultsScreen.classList.add('hidden');
             screen.classList.remove('hidden');
+            if (screen === startScreen) {
+                renderBookmarksSection();
+            }
         };
         
         const handleNameSubmit = () => {
@@ -494,8 +596,8 @@
         };
         
         const startNewQuiz = () => {
-            const imageQuestions = allQuestions.filter(q => q.imageUrl);
-            const textQuestions = allQuestions.filter(q => !q.imageUrl);
+            const imageQuestions = allQuestionsWithIndex.filter(q => q.imageUrl);
+            const textQuestions = allQuestionsWithIndex.filter(q => !q.imageUrl);
 
             const shuffledImageQs = shuffleArray([...imageQuestions]);
             const shuffledTextQs = shuffleArray([...textQuestions]);
@@ -541,6 +643,16 @@
                 button.onclick = () => handleAnswer(index);
                 optionsContainer.appendChild(button);
             });
+            
+            // Update bookmark button state
+            if (bookmarkedQuestions.has(question.originalIndex)) {
+                bookmarkBtn.innerHTML = bookmarkedIconSVG;
+                bookmarkBtn.setAttribute('aria-label', 'Pregunta guardada');
+            } else {
+                bookmarkBtn.innerHTML = bookmarkIconSVG;
+                bookmarkBtn.setAttribute('aria-label', 'Guardar pregunta');
+            }
+
             nextButtonContainer.innerHTML = '';
         };
 
@@ -643,8 +755,7 @@
                 return;
             }
 
-            const results = allQuestions.map((q, index) => ({ ...q, originalIndex: index }))
-                                     .filter(q => q.questionText.toLowerCase().includes(searchTerm));
+            const results = allQuestionsWithIndex.filter(q => q.questionText.toLowerCase().includes(searchTerm));
 
             renderSearchResults(results, searchTerm);
         };
@@ -658,7 +769,6 @@
             if (results.length > 0) {
                 noResultsMessage.classList.add('hidden');
                 
-                // Render list of individual questions
                 results.forEach(q => {
                     const li = document.createElement('li');
                     li.className = 'p-3 bg-gray-50 rounded-md flex justify-between items-center';
@@ -673,7 +783,6 @@
                     searchResultsList.appendChild(li);
                 });
 
-                // Render "Start Topic Quiz" button
                 const topicButton = document.createElement('button');
                 topicButton.textContent = `Iniciar Test del Tema "${searchTerm}" (${results.length} preguntas)`;
                 topicButton.className = 'px-6 py-3 text-lg font-bold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-transform transform hover:scale-105 shadow-md';
@@ -686,12 +795,12 @@
         };
 
         const startQuizFromSearch = (questionIndex) => {
-            const selectedQuestion = allQuestions[questionIndex];
+            const selectedQuestion = allQuestionsWithIndex.find(q => q.originalIndex === questionIndex);
             
-            const otherQuestions = allQuestions.filter((_, index) => index !== questionIndex);
+            const otherQuestions = allQuestionsWithIndex.filter((q) => q.originalIndex !== questionIndex);
             const shuffledOthers = shuffleArray(otherQuestions).slice(0, 19);
 
-            const quizQuestions = [selectedQuestion, ...shuffledOthers];
+            const quizQuestions = shuffleArray([selectedQuestion, ...shuffledOthers]);
             startQuiz(quizQuestions);
         };
 
@@ -704,6 +813,9 @@
 
         // Initial Setup
         const initializeApp = () => {
+            loadBookmarks();
+            renderBookmarksSection();
+
             submitNameBtn.addEventListener('click', handleNameSubmit);
             nameInput.addEventListener('keyup', (event) => {
                 if (event.key === 'Enter') {
@@ -712,6 +824,7 @@
             });
             startBtn.addEventListener('click', startNewQuiz);
             searchInput.addEventListener('input', handleSearch);
+            bookmarkBtn.addEventListener('click', handleBookmarkToggle);
         };
 
         initializeApp();
