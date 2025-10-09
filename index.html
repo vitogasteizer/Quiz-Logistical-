@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Interactivo de Logística</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="manifest" href="./manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#2563eb"/>
     <link rel="apple-touch-icon" href="https://i.postimg.cc/Kv2jTDSr/image.png">
     <style>
@@ -118,7 +118,7 @@
 
     <!-- Footer -->
     <footer id="app-footer" class="fixed bottom-0 left-0 w-full p-3 z-10 text-gray-700 bg-gray-100 border-t border-gray-300 text-center">
-        <p class="text-sm">Creado por Avtandil Machitadze</p>
+        <p class="text-sm">Creado por Avtandil </p>
     </footer>
 
     <script>
@@ -832,9 +832,11 @@
             // Register Service Worker for PWA
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('./service-worker.js')
+                    // Construct the full URL to the service worker to avoid origin mismatches in specific environments.
+                    const swUrl = `${window.location.origin}/service-worker.js`;
+                    navigator.serviceWorker.register(swUrl)
                         .then(reg => console.log('Service worker registered.', reg))
-                        .catch(err => console.error('Service worker not registered.', err));
+                        .catch(err => console.error('Service worker not registered.', err, 'Attempted URL:', swUrl));
                 });
             }
         };
