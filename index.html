@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Interactivo de Logística</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#2563eb"/>
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/Kv2jTDSr/image.png">
     <style>
         .hidden { display: none; }
         .correct { background-color: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
@@ -825,6 +828,15 @@
             startBtn.addEventListener('click', startNewQuiz);
             searchInput.addEventListener('input', handleSearch);
             bookmarkBtn.addEventListener('click', handleBookmarkToggle);
+            
+            // Register Service Worker for PWA
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('./service-worker.js')
+                        .then(reg => console.log('Service worker registered.', reg))
+                        .catch(err => console.error('Service worker not registered.', err));
+                });
+            }
         };
 
         initializeApp();
