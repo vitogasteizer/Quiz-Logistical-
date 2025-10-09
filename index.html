@@ -76,7 +76,7 @@
     </div>
 
     <!-- Footer for Active Users -->
-    <footer id="active-users-footer" class="hidden fixed bottom-0 left-0 w-full p-3 z-10 text-gray-700">
+    <footer id="active-users-footer" class="hidden fixed bottom-0 left-0 w-full p-3 z-10 text-gray-700 bg-gray-100 border-t border-gray-300">
         <div class="max-w-7xl mx-auto px-4">
             <div id="active-users-container" class="flex items-center space-x-4 text-sm overflow-x-auto whitespace-nowrap">
                 <!-- Active users will be injected here by JS -->
@@ -309,6 +309,83 @@
             {
                 questionText: "¿Cómo puede un riesgo laboral afectar la salud de un trabajador según la definición de la OMS?",
                 options: ["Puede causar únicamente lesiones físicas.", "Puede provocar problemas físicos, mentales o sociales, afectando el bienestar completo.", "No afecta la salud si el trabajador tiene experiencia.", "Solo puede causar estrés mental."],
+                correctAnswerIndex: 1
+            },
+            
+            // New User Questions
+            { 
+                questionText: "¿Qué se hace en el mantenimiento de oportunidad?", 
+                options: [
+                    "Se repara después de una avería.", 
+                    "Se aprovecha para reparar elementos que no corresponden en ese momento durante otras operaciones.", 
+                    "Se realiza solo por empresas homologadas.", 
+                    "Se investiga el origen de anomalías."
+                ], 
+                correctAnswerIndex: 1 
+            },
+            {
+                questionText: "El mantenimiento correctivo se realiza antes de que ocurra una avería.",
+                options: ["Verdadero", "Falso"],
+                correctAnswerIndex: 1
+            },
+            {
+                questionText: "El mantenimiento obligatorio está regulado por una ________ y se realiza por empresas ________.",
+                options: ["norma / homologadas", "ley / acreditadas", "instrucción / certificadas", "manual / autorizadas"],
+                correctAnswerIndex: 0
+            },
+            {
+                questionText: "¿Cuáles son características del almacenamiento no planificado de equipos?",
+                options: [
+                    "Siempre limpio y fácil acceso.",
+                    "Se pierde tiempo en búsqueda y puede provocar accidentes.",
+                    "Condiciones que no estropeen el equipo.",
+                    "No obstruye zonas de seguridad."
+                ],
+                correctAnswerIndex: 1
+            },
+            {
+                questionText: "En el almacenamiento planificado, los equipos se guardan en condiciones que evitan humedad, goteras o heladas.",
+                options: ["Verdadero", "Falso"],
+                correctAnswerIndex: 0
+            },
+            {
+                questionText: "¿Qué implica el mantenimiento preventivo?",
+                options: [
+                    "Investigar anomalías detectadas.",
+                    "Realizar comprobaciones y operaciones mandadas por el fabricante, según el libro de trabajo.",
+                    "Reparar después de una avería.",
+                    "Aprovechar oportunidades durante otras operaciones."
+                ],
+                correctAnswerIndex: 1
+            },
+            {
+                questionText: "En el mantenimiento predictivo, ante anomalías o mediciones, se investiga su ________.",
+                options: ["origen", "duración", "coste", "frecuencia"],
+                correctAnswerIndex: 0
+            },
+            {
+                questionText: "¿Cuál es uno de los motivos del mantenimiento?",
+                options: [
+                    "Aumentar las paradas extraordinarias.",
+                    "Ahorro de dinero por roturas no controladas.",
+                    "Ignorar la seguridad.",
+                    "Reducir el funcionamiento correcto."
+                ],
+                correctAnswerIndex: 1
+            },
+            {
+                questionText: "Los fabricantes deben proporcionar piezas de repuesto durante 10 años después de que el producto deje de fabricarse.",
+                options: ["Verdadero", "Falso"],
+                correctAnswerIndex: 0
+            },
+            {
+                questionText: '¿Qué incluye el marcado "CE" en los equipos?',
+                options: [
+                    "Es una marca exclusiva de China Export.",
+                    "Indica que está fabricado conforme a un expediente técnico y es una máquina segura.",
+                    "Solo garantiza 3 años de garantía.",
+                    "No requiere manual en español."
+                ],
                 correctAnswerIndex: 1
             }
         ];
