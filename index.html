@@ -425,6 +425,39 @@
         let score = 0;
         let startTime = 0;
         let timerInterval;
+        let wakeLock = null;
+
+        // Screen Wake Lock API
+        const requestWakeLock = async () => {
+            if ('wakeLock' in navigator) {
+                try {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    wakeLock.addEventListener('release', () => {
+                        // The wake lock was released. It will be re-acquired on visibilitychange.
+                    });
+                } catch (err) {
+                    console.error('Screen Wake Lock request failed:', err);
+                }
+            }
+        };
+
+        const releaseWakeLock = async () => {
+            if (wakeLock !== null) {
+                try {
+                    await wakeLock.release();
+                    wakeLock = null;
+                } catch (err) {
+                    console.error('Screen Wake Lock release failed:', err);
+                }
+            }
+        };
+        
+        document.addEventListener('visibilitychange', () => {
+            // Re-acquire the wake lock if the page is visible again and the quiz is active.
+            if (document.visibilityState === 'visible' && !quizScreen.classList.contains('hidden')) {
+                requestWakeLock();
+            }
+        });
 
         // Utility Functions
         const shuffleArray = (array) => {
@@ -498,6 +531,8 @@
             timerInterval = setInterval(updateTimer, 1000);
             updateTimer();
             
+            requestWakeLock();
+            
             showScreen(quizScreen);
             renderQuestion();
         };
@@ -509,8 +544,14 @@
             const shuffledImageQs = shuffleArray([...imageQuestions]);
             const shuffledTextQs = shuffleArray([...textQuestions]);
 
-            // Ensure at least 2 image questions, but can be more (e.g., 3) for variety
-            const numImageQs = Math.min(shuffledImageQs.length, 3);
+            // For variety, use a random number of image questions (between 2 and 4)
+            const minImg = 2;
+            const maxImg = 4;
+            let numImageQs = Math.floor(Math.random() * (maxImg - minImg + 1)) + minImg;
+            
+            // Ensure we don't request more image questions than available
+            numImageQs = Math.min(numImageQs, shuffledImageQs.length);
+
             const numTextQs = 20 - numImageQs;
 
             const quizQuestions = [
@@ -591,6 +632,7 @@
 
         const finishQuiz = () => {
             clearInterval(timerInterval);
+            releaseWakeLock();
             const elapsedTime = Math.round((Date.now() - startTime) / 1000);
             
             const incorrectQuestions = currentQuestions.filter((q, index) => selectedAnswers[index] !== q.correctAnswerIndex);
