@@ -13,7 +13,6 @@
         .correct { background-color: #d1fae5 !important; border-color: #10b981 !important; color: #065f46 !important; }
         .incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
         .disabled { cursor: not-allowed; }
-        body { padding-bottom: 60px; /* Space for the fixed footer */ }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
@@ -110,6 +109,9 @@
                 <p id="progress-text" class="text-gray-600 font-semibold text-sm">Pregunta 1 / 20</p>
                 
                 <div class="flex items-center gap-4">
+                    <button id="sound-toggle-btn" class="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Activar/desactivar sonidos">
+                        <!-- SVG icon will be inserted here -->
+                    </button>
                     <button id="bookmark-btn" class="p-2 rounded-full hover:bg-yellow-100 transition" aria-label="Guardar pregunta">
                         <!-- SVG will be dynamically inserted here -->
                     </button>
@@ -152,14 +154,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer id="app-footer" class="fixed bottom-0 left-0 w-full p-3 z-10 text-gray-700 bg-gray-100 border-t border-gray-300 flex justify-center items-center">
-        <p class="text-sm mr-4">Creado por Avtandil</p>
-        <button id="sound-toggle-btn" class="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Activar/desactivar sonidos">
-            <!-- SVG icon will be inserted here -->
-        </button>
-    </footer>
 
     <script type="module" src="index.js"></script>
 </body>
