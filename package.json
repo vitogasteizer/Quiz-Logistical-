@@ -1,20 +1,13 @@
 {
-  "name": "quiz-builder",
+  "name": "logistica-quiz",
+  "version": "1.0.0",
+  "description": "Test Interactivo de Logística",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "homepage": "https://<GITHUB_USERNAME>.github.io/<REPOSITORY_NAME>",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-
+    "deploy": "gh-pages -d ."
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "gh-pages": "^4.0.0"
   }
 }
