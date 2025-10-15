@@ -545,7 +545,7 @@ const renderSearchResults = (results, searchTerm) => {
             const startButton = document.createElement('button');
             startButton.textContent = 'Empezar Test';
             startButton.className = 'ml-4 px-3 py-1.5 text-sm font-semibold text-white bg-green-600 rounded-md hover:bg-green-700 whitespace-nowrap';
-            startButton.onclick = () => startQuizFromSearch(q.originalIndex);
+            startButton.onclick = () => startQuiz(results);
             
             li.appendChild(startButton);
             searchResultsList.appendChild(li);
@@ -560,16 +560,6 @@ const renderSearchResults = (results, searchTerm) => {
     } else {
         noResultsMessage.classList.remove('hidden');
     }
-};
-
-const startQuizFromSearch = (questionIndex) => {
-    const selectedQuestion = allQuestionsWithIndex.find(q => q.originalIndex === questionIndex);
-    
-    const otherQuestions = allQuestionsWithIndex.filter((q) => q.originalIndex !== questionIndex);
-    const shuffledOthers = shuffleArray(otherQuestions).slice(0, 19);
-
-    const quizQuestions = shuffleArray([selectedQuestion, ...shuffledOthers]);
-    startQuiz(quizQuestions);
 };
 
 const showStartScreenView = () => {
