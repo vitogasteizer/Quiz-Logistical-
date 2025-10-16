@@ -1,7 +1,7 @@
 {
-  "name": "Test Interactivo de Logística",
-  "short_name": "Quiz Logística",
-  "description": "Pon a prueba tus conocimientos de logística con este test interactivo.",
+  "name": "Tests Interactivos",
+  "short_name": "avma Quiz",
+  "description": "Pon a prueba tus conocimientos con este test interactivo.",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#f3f4f6",
