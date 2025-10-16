@@ -1,9 +1,10 @@
-const CACHE_NAME = 'logistica-quiz-cache-v1';
+const CACHE_NAME = 'logistica-quiz-cache-v2';
 const urlsToCache = [
   './',
   './index.html',
   './index.js',
   './questions.js',
+  './preparacion-pedidos-questions.js',
   'https://cdn.tailwindcss.com',
   'https://i.postimg.cc/Kv2jTDSr/image.png',
   'https://i.postimg.cc/vH2JdYhn/Almacenaje-m-vil.jpg',
