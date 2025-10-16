@@ -1,5 +1,5 @@
 {
-  "name": "Quiz Builder",
-  "description": "An interactive quiz application that generates tests from an uploaded PDF file using Gemini. Users can take quizzes, see their scores, and retry incorrect questions until they master the material.",
+  "name": "Tests Interactivos de Logística",
+  "description": "Una aplicación de test interactivo sobre logística para poner a prueba tus conocimientos.",
   "requestFramePermissions": []
 }
