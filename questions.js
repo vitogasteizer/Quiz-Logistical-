@@ -1,4 +1,4 @@
-const logisticaQuestions = [
+export const logisticaQuestions = [
     // Page 1
     { questionText: "1. ¿Cuál es el objetivo principal en la cima de la pirámide logística?", options: ["Reducir costes al mínimo", "Dar al cliente lo que quiere", "Optimizar el tiempo de entrega", "Asegurar la calidad de los recursos"], correctAnswerIndex: 1 },
     { questionText: "2. En la pirámide logística, ¿qué elemento sostiene la base del proceso?", options: ["La calidad del producto", "Recursos/costes y tiempo", "La trazabilidad de la mercancía", "La comunicación entre equipos"], correctAnswerIndex: 1 },
@@ -257,20 +257,4 @@ const logisticaQuestions = [
     // Page 45
     { questionText: "212. Los fabricantes deben proporcionar piezas de repuesto durante 10 años después de que el producto deje de fabricarse.", options: ["Verdadero", "Falso"], correctAnswerIndex: 0 },
     { questionText: "213. ¿Qué incluye el marcado \"CE\" en los equipos?", options: ["Es una marca exclusiva de China Export.", "Indica que está fabricado conforme a un expediente técnico y es una máquina segura.", "Solo garantiza 3 años de garantía.", "No requiere manual en español."], correctAnswerIndex: 1 }
-];
-
-export const allTopics = [
-    {
-      id: 'logistica',
-      name: 'Test de Logística',
-      description: 'Preguntas sobre la gestión y operativa de almacenes.',
-      questions: logisticaQuestions
-    }
-    // Para añadir más temas, crea un nuevo array de preguntas y añádelo aquí
-    // {
-    //   id: 'new-topic',
-    //   name: 'Nuevo Tema de Test',
-    //   description: 'Descripción del nuevo tema.',
-    //   questions: newTopicQuestionsArray
-    // }
 ];

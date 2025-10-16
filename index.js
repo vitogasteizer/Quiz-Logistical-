@@ -1,4 +1,20 @@
-import { allTopics } from './questions.js';
+import { logisticaQuestions } from './questions.js';
+import { preparacionPedidosQuestions } from './preparacion-pedidos-questions.js';
+
+const allTopics = [
+    {
+      id: 'logistica',
+      name: 'Test de Logística',
+      description: 'Preguntas sobre la gestión y operativa de almacenes.',
+      questions: logisticaQuestions
+    },
+    {
+      id: 'preparacion-pedidos',
+      name: 'Preparación de Pedidos',
+      description: 'Preguntas sobre el proceso de picking y empaquetado.',
+      questions: preparacionPedidosQuestions
+    }
+];
 
 let allQuestionsWithIndex = [];
 let questionCounter = 0;
