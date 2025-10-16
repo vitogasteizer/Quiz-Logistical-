@@ -6,7 +6,7 @@ const urlsToCache = [
   './questions.js',
   './preparacion-pedidos-questions.js',
   'https://cdn.tailwindcss.com',
-  'https://i.postimg.cc/Kv2jTDSr/image.png',
+  'https://i.postimg.cc/tJDL7vz5/Quiz-by-avma.png',
   'https://i.postimg.cc/vH2JdYhn/Almacenaje-m-vil.jpg',
   'https://i.postimg.cc/c4kpNxhn/Sistema-Cantilever.jpg',
   'https://i.postimg.cc/J4YfWrx1/Sistema-autom-ticos.jpg',
