@@ -1,11 +1,12 @@
 const CACHE_NAME = 'logistica-quiz-cache-v2';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/index.js',
-  '/data/questions.js',
-  '/data/preparacion-pedidos-questions.js',
-  '/data/preparacion-pedidos-2-questions.js',
+  './',
+  './index.html',
+  './index.js',
+  './manifest.json',
+  './data/questions.js',
+  './data/preparacion-pedidos-questions.js',
+  './data/preparacion-pedidos-2-questions.js',
   'https://cdn.tailwindcss.com',
   'https://i.postimg.cc/tJDL7vz5/Quiz-by-avma.png',
   'https://i.postimg.cc/vH2JdYhn/Almacenaje-m-vil.jpg',
