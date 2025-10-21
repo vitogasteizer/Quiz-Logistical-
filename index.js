@@ -1,5 +1,6 @@
 import { logisticaQuestions } from './questions.js';
 import { preparacionPedidosQuestions } from './preparacion-pedidos-questions.js';
+import { preparacionPedidos2Questions } from './preparacion-pedidos-2-questions.js';
 
 const allTopics = [
     {
@@ -13,6 +14,12 @@ const allTopics = [
       name: 'Preparación de Pedidos',
       description: 'Preguntas sobre el proceso de picking y empaquetado.',
       questions: preparacionPedidosQuestions
+    },
+    {
+      id: 'preparacion-pedidos-2',
+      name: 'Preparación de Pedidos, parte 2',
+      description: 'Preguntas sobre manutención, picking, inventario y prevención de riesgos.',
+      questions: preparacionPedidos2Questions
     }
 ];
 
