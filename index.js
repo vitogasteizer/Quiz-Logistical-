@@ -1,4 +1,5 @@
 
+
 import { logisticaQuestions } from './data/questions.js';
 import { preparacionPedidosQuestions } from './data/preparacion-pedidos-questions.js';
 import { preparacionPedidos2Questions } from './data/preparacion-pedidos-2-questions.js';
@@ -888,7 +889,7 @@ const initializeApp = () => {
     // Register Service Worker for PWA
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./service-worker.js')
+            navigator.serviceWorker.register('/service-worker.js')
                 .then(reg => console.log('Service worker registered.', reg))
                 .catch(err => console.error('Service worker not registered.', err));
         });
