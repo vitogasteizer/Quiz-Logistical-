@@ -1,24 +1,25 @@
-import { logisticaQuestions } from './questions.js';
-import { preparacionPedidosQuestions } from './preparacion-pedidos-questions.js';
-import { preparacionPedidos2Questions } from './preparacion-pedidos-2-questions.js';
+
+import { logisticaQuestions } from './data/questions.js';
+import { preparacionPedidosQuestions } from './data/preparacion-pedidos-questions.js';
+import { preparacionPedidos2Questions } from './data/preparacion-pedidos-2-questions.js';
 
 const allTopics = [
     {
       id: 'logistica',
       name: 'Test de Logística',
-      description: 'Preguntas sobre la gestión y operativa de almacenes.',
+      description: `Preguntas sobre la gestión y operativa de almacenes. (${logisticaQuestions.length} preguntas)`,
       questions: logisticaQuestions
     },
     {
       id: 'preparacion-pedidos',
       name: 'Preparación de Pedidos',
-      description: 'Preguntas sobre el proceso de picking y empaquetado.',
+      description: `Preguntas sobre el proceso de picking y empaquetado. (${preparacionPedidosQuestions.length} preguntas)`,
       questions: preparacionPedidosQuestions
     },
     {
       id: 'preparacion-pedidos-2',
       name: 'Preparación de Pedidos, parte 2',
-      description: 'Preguntas sobre manutención, picking, inventario y prevención de riesgos.',
+      description: `Preguntas sobre manutención, picking, inventario y prevención de riesgos. (${preparacionPedidos2Questions.length} preguntas)`,
       questions: preparacionPedidos2Questions
     }
 ];
